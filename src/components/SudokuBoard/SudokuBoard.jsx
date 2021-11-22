@@ -24,5 +24,7 @@ function getBoardStyles() {
   
   border-4 
   border-purple-400
+
+  dark:border-purple-800
   `
 }

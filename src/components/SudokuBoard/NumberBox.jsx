@@ -42,5 +42,9 @@ function getInputStyles() {
   text-center 
   text-xl 
   text-purple-600
+
+  dark:text-purple-100
+  dark:bg-gray-800
+  dark:border-purple-800
   `
 }

@@ -8,12 +8,14 @@ import BoardStatus from './components/BoardStatus';
 function App() {
   return (
     <RecoilRoot>
-      <main className='flex flex-col justify-center items-center min-h-screen'>
-        <BoardStatus />
-        <div className='inline-block bg-purple-200'>
-          <SudokuBoard />
-        </div>
-      </main>
+      <div className='dark'>
+        <main className='flex flex-col justify-center items-center min-h-screen dark:bg-gray-900'>
+          <BoardStatus />
+          <div className='inline-block bg-purple-200 dark:bg-purple-800'>
+            <SudokuBoard />
+          </div>
+        </main>
+      </div>
     </RecoilRoot>
   );
 }
