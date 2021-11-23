@@ -6,6 +6,7 @@ export function assertIsSolved(board) {
         let possibleNums = [];
 
         for (let num = 1; num <= 9; num++) {
+            // eslint-disable-next-line
             if (isPossibleNum(board, y, x, num)) {
                 possibleNums.push(num);
             }

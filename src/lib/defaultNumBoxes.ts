@@ -1,4 +1,7 @@
-const defaultNumBoxes = [
+
+type NumBoxDefaultValue = [string, number | string];
+
+const defaultNumBoxes: NumBoxDefaultValue[] = [
   ['box-0-0', 3],
   ['box-1-0', 4],
   ['box-2-0', 5],

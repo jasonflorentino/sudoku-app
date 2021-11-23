@@ -1,3 +1,5 @@
+import React from 'react';
+
 import sudokuState from '../../recoil/sudokuState';
 import numBoxesData from '../../lib/defaultNumBoxes';
 import NumberBox from './NumberBox';

@@ -1,14 +1,20 @@
+import React from 'react';
 import {
+  RecoilState,
   useRecoilState,
 } from 'recoil';
 
 import { isValidNumBoxInput } from '../../lib/inputUtils';
 
-const NumberBox = ({ numBoxAtom }) => {
+type Props = {
+  numBoxAtom: RecoilState<string | number>
+}
+
+const NumberBox: React.FC<Props> = ({ numBoxAtom }) => {
   const [numBoxVal, setNumBoxVal] = useRecoilState(numBoxAtom);
   const inputStyles = getInputStyles();
 
-  const handleNumBoxChange = (e) => {
+  const handleNumBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     if (val.length === 0 || !isValidNumBoxInput(val)) {
       return setNumBoxVal('');

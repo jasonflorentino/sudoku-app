@@ -11,6 +11,7 @@ export const NOT_SOLVED = 'Not Solved';
 const sudokuSolvedState = selector({
   key: 'sudokuSolvedState',
   get: ({get}) => {
+    // eslint-disable-next-line
     const board = createBoard(get, sudokuState);
     const isSolved = assertIsSolved(board);
     return isSolved ? SOLVED : NOT_SOLVED;

@@ -1,10 +1,15 @@
 import {
   atom,
+  RecoilState,
 } from 'recoil';
 
 import numBoxesData from '../lib/defaultNumBoxes';
 
-const sudokuState = {};
+type SudokuStateMap = {
+  [key: string]: RecoilState<number | string>
+}
+
+const sudokuState: SudokuStateMap = {};
 
 for (const [boxId, defaultVal] of numBoxesData) {
   sudokuState[boxId] = atom({

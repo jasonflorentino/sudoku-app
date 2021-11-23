@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   RecoilRoot,
 } from 'recoil';
@@ -5,7 +6,7 @@ import {
 import SudokuBoard from './components/SudokuBoard/SudokuBoard';
 import BoardStatus from './components/BoardStatus';
 
-function App() {
+const App = () => {
   return (
     <RecoilRoot>
       <div className='dark'>
