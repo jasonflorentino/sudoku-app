@@ -23,7 +23,7 @@ const ThemeControl: React.FC<Props> = ({ children }) => {
           value="dark" 
           checked={isDark} 
           onChange={handleChange}
-        ></input>
+        />
       </div>
       {children}
     </div>

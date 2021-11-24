@@ -5,16 +5,27 @@ import {
 
 import numBoxesData from '../lib/defaultNumBoxes';
 
-type SudokuStateMap = {
-  [key: string]: RecoilState<number | string>
+export type SudokuStateMap = {
+  [key: string]: RecoilState<NumBoxState>
+}
+
+export interface NumBoxState {
+  id: string;
+  value: number | string;
+  isLocked: boolean;
 }
 
 const sudokuState: SudokuStateMap = {};
 
 for (const [boxId, defaultVal] of numBoxesData) {
+  const defaultState: NumBoxState = {
+    id: boxId,
+    value: defaultVal,
+    isLocked: false
+  }
   sudokuState[boxId] = atom({
     key: boxId,
-    default: defaultVal,
+    default: defaultState,
   })
 }
 

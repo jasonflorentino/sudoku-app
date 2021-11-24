@@ -3,9 +3,11 @@ import React from 'react';
 import sudokuState from '../../recoil/sudokuState';
 import numBoxesData from '../../lib/defaultNumBoxes';
 import NumberBox from './NumberBox';
+import { formatStyles } from '../../lib/styleUtils';
 
-const SudokuBoard = () => {
+const SudokuBoard: React.FC = () => {
   const boardStyles = getBoardStyles();
+  
   return (
     <div className={boardStyles}>
       {numBoxesData.map(([boxId]) => (
@@ -18,7 +20,7 @@ const SudokuBoard = () => {
 export default SudokuBoard;
 
 function getBoardStyles() {
-  return `
+  return formatStyles(`
   grid 
   gap-1 
   grid-cols-sudoku 
@@ -28,5 +30,5 @@ function getBoardStyles() {
   border-purple-400
 
   dark:border-purple-800
-  `
+  `);
 }

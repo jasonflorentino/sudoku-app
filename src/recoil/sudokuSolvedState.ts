@@ -1,8 +1,9 @@
 import {
+  GetRecoilValue,
   selector,
 } from 'recoil';
 
-import sudokuState from './sudokuState';
+import sudokuState, { SudokuStateMap } from './sudokuState';
 import { assertIsSolved } from '../lib/solverUtils';
 
 export const SOLVED = 'Solved!';
@@ -20,7 +21,7 @@ const sudokuSolvedState = selector({
 
 export default sudokuSolvedState;
 
-function createBoard(get, sudokuState) {
+function createBoard(get: GetRecoilValue, sudokuState: SudokuStateMap) {
   const board = [];
   let col = [];
   for (const numBoxId in sudokuState) {
@@ -28,7 +29,7 @@ function createBoard(get, sudokuState) {
       board.push(col);
       col = [];
     }
-    const val = get(sudokuState[numBoxId]);
+    const {value: val} = get(sudokuState[numBoxId]);
 
     switch (val) {
       case '':
