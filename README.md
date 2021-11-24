@@ -12,3 +12,9 @@ Not really sure where this is going yet, it's kind of just for learning/fun.
 ✅ Add Typescript  
 ✅ Able to change each number in the grid  
 ✅ Display the board on a grid  
+
+### Details
+- Bootstrapped with CRA
+- Added Tailwind and Recoil first
+- Converted to TypeScript after
+- Seems to be some dependency issues that popped up during TypeScript migration, but it worked after installing deps with `--legacy-peer-deps` flag.
