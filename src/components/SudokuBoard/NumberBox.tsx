@@ -1,24 +1,34 @@
+// Imports
 import React from 'react';
 import {
   RecoilState,
   useRecoilState,
-  useSetRecoilState,
 } from 'recoil';
 
 import { isValidNumBoxInput } from '../../lib/inputUtils';
 import { NumBoxState } from '../../recoil/sudokuState';
 import activeNumBoxState from '../../recoil/activeNumBoxState';
 import { textColor, formatStyles } from '../../lib/styleUtils';
+import { isBoxInBoardGroup } from '../../lib/solverUtils';
 
+// Types
 type Props = {
   numBoxAtom: RecoilState<NumBoxState>
 }
 
+// Styles
+const defaultBg   = ' bg-purple-100 dark:bg-gray-800   focus:bg-pink-200 dark:focus:bg-pink-600 ';
+const highlightBg = ' bg-pink-200   dark:bg-pink-900   focus:bg-pink-300 dark:focus:bg-pink-600 ';
+const lockedBg    = ' bg-purple-300 dark:bg-gray-900   focus:bg-pink-200 dark:focus:bg-pink-900 ';
+const emptyBg     = ' bg-purple-400 dark:bg-purple-900 focus:bg-pink-300 dark:focus:bg-pink-700 '
+
+// Component
 const NumberBox: React.FC<Props> = ({ numBoxAtom }) => {
   const [currentNumBoxState, setNumBoxState] = useRecoilState(numBoxAtom);
-  const setActiveNumBox = useSetRecoilState(activeNumBoxState);
+  const [activeNumBox, setActiveNumBox] = useRecoilState(activeNumBoxState);
 
-  const { value: numBoxVal, isLocked } = currentNumBoxState;
+  const { id: thisBoxId, value: numBoxVal, isLocked } = currentNumBoxState;
+  const { id: activeBoxId } = activeNumBox;
 
   const handleActiveNumBoxChange = () => {
     setActiveNumBox(currentNumBoxState);
@@ -40,11 +50,24 @@ const NumberBox: React.FC<Props> = ({ numBoxAtom }) => {
     })
   }
 
-  const lockedStyles = getInputLockedStyles();
-  const inputStyles = getInputStyles() + (isLocked ? lockedStyles : '')
+  const isHighlighted = isBoxInBoardGroup(thisBoxId, activeBoxId);
+  const isEmpty = !numBoxVal;
+
+  const backgroundStyles = isEmpty 
+    ? emptyBg
+    : isHighlighted 
+    ? highlightBg
+    : isLocked
+    ? lockedBg
+    : defaultBg
+
+  const inputStyles = 
+    getInputStyles() 
+    + (isLocked ? getInputLockedStyles() : '') 
+    + backgroundStyles;
 
   return (
-    <div className='flex justify-center items-center w-full h-full'>
+    <div className={`flex justify-center items-center w-full h-full`}>
       <input 
         className={inputStyles}
         type='text' 
@@ -72,12 +95,8 @@ function getInputStyles() {
   text-xl 
 
   focus:outline-none
-  focus:bg-purple-100
 
-  dark:bg-gray-800
   dark:border-purple-800
-  
-  dark:focus:bg-purple-700
 
   `);
 }
@@ -85,13 +104,10 @@ function getInputStyles() {
 function getInputLockedStyles() {
   return formatStyles(`
   text-purple-500 
-  dark:text-purple-200 
-  
-  bg-purple-200 
-  dark:bg-gray-900
+  dark:text-purple-400 
+  dark:focus:text-gray-400
 
-  focus:bg-purple-200
-  dark:focus:bg-purple-500
+  text-2xl
 
   `);
 }

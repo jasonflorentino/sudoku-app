@@ -36,7 +36,7 @@ function createBoard(get: GetRecoilValue, sudokuState: SudokuStateMap) {
         col.push(0);
         break;
       default:
-        col.push(val);
+        col.push(Number(val));
         break;
     }
   }
