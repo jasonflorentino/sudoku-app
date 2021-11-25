@@ -17,7 +17,7 @@ const App: React.FC = () => {
     <ThemeControl>
       <main className='flex flex-col justify-start items-center min-h-screen dark:bg-gray-900'>
         <BoardStatus />
-        <div className='inline-block bg-purple-200 dark:bg-purple-600 flex'>
+        <div className='inline-block bg-purple-200 dark:bg-purple-600 flex flex-col'>
           <SudokuBoard />
           <NumBoxControl boxId={boxId} />
         </div>

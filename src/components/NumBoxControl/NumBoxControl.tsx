@@ -30,8 +30,8 @@ const NumBoxControl: React.FC<Props> = ({ boxId = '' }) => {
   }
 
   return (
-    <div className="p-3 w-40">
-      <div className={`p-2 flex justify-center text-4xl font-bold ${textColor}`}>
+    <div className="p-3 w-full flex justify-start items-center">
+      <div className={`p-2 mr-2 flex justify-center text-4xl font-bold ${textColor}`}>
         {currentNumBoxState.value || "0"}
       </div>
       <div className={`flex justify-center`}>
