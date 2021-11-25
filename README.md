@@ -5,6 +5,9 @@ Not really sure where this is going yet, it's kind of just for learning/fun.
 
 ### Tasks:
 💭 Change number from the Control pane  
+💭 Click button to auto solve puzzle  
+✅ Can't lock an empty number box  
+✅ Different colors for different box states: Focus, Empty, Locked, Highlighted  
 ✅ Lock and Unlock a box from being changed  
 ✅ Add control pane for other actions on a selected box  
 ✅ UI feedback for if board is solved or not  
