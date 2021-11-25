@@ -18,9 +18,11 @@ const NumBoxControl: React.FC<Props> = ({ boxId = '' }) => {
   
   if (!boxId) return null;
 
-  const { isLocked } = currentNumBoxState;
+  const { isLocked, value } = currentNumBoxState;
 
   const handleNumBoxLockChange = () => {
+    if (!value) return;
+    
     setCurrentNumBoxState({
       ...currentNumBoxState,
       isLocked: !isLocked
