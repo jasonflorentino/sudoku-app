@@ -1,4 +1,4 @@
-export function isValidNumBoxInput(str) {
+export function isValidNumBoxInput(str: string) {
   const code = str.charCodeAt(0);
   if (isNaN(code)) return false;
   if (code < 48) return false; // Number 0

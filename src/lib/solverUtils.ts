@@ -1,4 +1,4 @@
-export function assertIsSolved(board) {
+export function assertIsSolved(board: number[][]) {
   for (let y = 0; y < 9; y++) {
     for (let x = 0; x < 9; x++)  {
         const val = board[y][x];
@@ -20,7 +20,12 @@ export function assertIsSolved(board) {
 return true;
 }
 
-export function isPossibleNum(board, y, x, num) {
+export function isPossibleNum(
+  board: number[][], 
+  y: number, 
+  x: number, 
+  num: number
+) {
   let isValidRow = true;
   let isValidCol = true;
   let isValidBox = true;
@@ -43,4 +48,12 @@ export function isPossibleNum(board, y, x, num) {
   }
 
   return isValidRow && isValidCol && isValidBox;
+}
+
+export function isBoxInBoardGroup(currId: string, activeId: string) {
+    const [ , currXVal, currYVal ] = currId.split('-');
+    const [ , activeXVal, activeYVal ] = activeId.split('-');
+    if (activeXVal === currXVal) return true;
+    if (activeYVal === currYVal) return true;
+    return false;
 }
