@@ -1,5 +1,5 @@
 // Imports
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   RecoilState,
   useRecoilState,
@@ -9,31 +9,50 @@ import { isValidNumBoxInput } from '../../lib/inputUtils';
 import { NumBoxState } from '../../recoil/sudokuState';
 import activeNumBoxState from '../../recoil/activeNumBoxState';
 import { textColor, formatStyles } from '../../lib/styleUtils';
-import { isBoxInBoardGroup } from '../../lib/solverUtils';
+import { isThisBoxInGroupWithActive } from '../../lib/solverUtils';
 
 // Types
 type Props = {
   numBoxAtom: RecoilState<NumBoxState>
-}
+};
+type RefForInputOrNothing = React.MutableRefObject<null | HTMLInputElement>;
 
 // Styles
-const defaultBg   = ' bg-purple-100 dark:bg-gray-800   focus:bg-pink-200 dark:focus:bg-pink-600 ';
-const highlightBg = ' bg-pink-200   dark:bg-pink-900   focus:bg-pink-300 dark:focus:bg-pink-600 ';
-const lockedBg    = ' bg-purple-300 dark:bg-gray-900   focus:bg-pink-200 dark:focus:bg-pink-900 ';
-const emptyBg     = ' bg-purple-400 dark:bg-purple-900 focus:bg-pink-300 dark:focus:bg-pink-700 '
+const defaultBgStyle   = ' bg-purple-100 dark:bg-gray-800   focus:bg-pink-200 dark:focus:bg-pink-600 ';
+const highlightBgStyle = ' bg-pink-200   dark:bg-pink-900   focus:bg-pink-300 dark:focus:bg-pink-600 ';
+const lockedBgStyle    = ' bg-purple-300 dark:bg-gray-900   focus:bg-pink-200 dark:focus:bg-pink-900 ';
+const emptyBgStyle     = ' bg-purple-400 dark:bg-purple-900 focus:bg-pink-300 dark:focus:bg-pink-700 ';
 
 // Component
 const NumberBox: React.FC<Props> = ({ numBoxAtom }) => {
   const [currentNumBoxState, setNumBoxState] = useRecoilState(numBoxAtom);
   const [activeNumBox, setActiveNumBox] = useRecoilState(activeNumBoxState);
+  const inputEl: RefForInputOrNothing = useRef(null);
 
   const { id: thisBoxId, value: numBoxVal, isLocked } = currentNumBoxState;
   const { id: activeBoxId } = activeNumBox;
 
-  const handleActiveNumBoxChange = () => {
-    setActiveNumBox(currentNumBoxState);
-  }
+  /** Handles focussing input when locked box gets unlocked */
+  useEffect(() => {
+    const isAlreadySelected = activeBoxId === thisBoxId
+    if (isAlreadySelected && isLocked === false) {
+      inputEl.current?.focus();
+    };
+  // eslint-disable-next-line
+  }, [isLocked]); // Don't run effect when boxIds change, only when isLocked changes
 
+  /** Sets this box as the Active Box */
+  const handleActiveNumBoxChange = () => {
+    // Debounce if already set
+    // (This func handles multiple 'selection' events)
+    if (activeBoxId === thisBoxId) {
+      return;
+    };
+    
+    setActiveNumBox(currentNumBoxState);
+  };
+
+  /** Changes the value in this box */
   const handleNumBoxValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isLocked) return;
 
@@ -47,19 +66,20 @@ const NumberBox: React.FC<Props> = ({ numBoxAtom }) => {
     setNumBoxState({
       ...currentNumBoxState,
       value: Number(val[0])
-    })
-  }
+    });
+  };
 
-  const isHighlighted = isBoxInBoardGroup(thisBoxId, activeBoxId);
+  const isHighlighted = isThisBoxInGroupWithActive(thisBoxId, activeBoxId);
   const isEmpty = !numBoxVal;
 
-  const backgroundStyles = isEmpty 
-    ? emptyBg
+  const backgroundStyles = 
+    isEmpty 
+    ? emptyBgStyle
     : isHighlighted 
-    ? highlightBg
+    ? highlightBgStyle
     : isLocked
-    ? lockedBg
-    : defaultBg
+    ? lockedBgStyle
+    : defaultBgStyle;
 
   const inputStyles = 
     getInputStyles() 
@@ -67,17 +87,22 @@ const NumberBox: React.FC<Props> = ({ numBoxAtom }) => {
     + backgroundStyles;
 
   return (
-    <div className={`flex justify-center items-center w-full h-full`}>
+    <div 
+      className={`flex justify-center items-center w-full h-full`}
+      onClick={handleActiveNumBoxChange}
+    >
       <input 
+        ref={inputEl}
         className={inputStyles}
         type='text' 
         value={numBoxVal} 
         onChange={handleNumBoxValueChange} 
         onFocus={handleActiveNumBoxChange}
+        disabled={isLocked}
       />
     </div>
-  )
-}
+  );
+};
 
 export default NumberBox;
 
@@ -89,6 +114,7 @@ function getInputStyles() {
   w-full 
   h-full 
   border
+  cursor-default
    
   font-bold 
   text-center 
@@ -99,7 +125,7 @@ function getInputStyles() {
   dark:border-purple-800
 
   `);
-}
+};
 
 function getInputLockedStyles() {
   return formatStyles(`
@@ -110,4 +136,4 @@ function getInputLockedStyles() {
   text-2xl
 
   `);
-}
+};

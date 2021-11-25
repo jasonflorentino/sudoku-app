@@ -6,17 +6,16 @@ import {
 import sudokuState from "../../recoil/sudokuState";
 import activeNumBoxState from "../../recoil/activeNumBoxState";
 import { buttonLook, textColor } from "../../lib/styleUtils";
+import BoardStatus from './BoardStatus';
 
 type Props = {
   boxId?: string
-}
+};
 
 const NumBoxControl: React.FC<Props> = ({ boxId = '' }) => {
   const [currentNumBoxState, setCurrentNumBoxState] = useRecoilState(
     boxId ? sudokuState[boxId] : activeNumBoxState
   );
-  
-  if (!boxId) return null;
 
   const { isLocked, value } = currentNumBoxState;
 
@@ -26,15 +25,18 @@ const NumBoxControl: React.FC<Props> = ({ boxId = '' }) => {
     setCurrentNumBoxState({
       ...currentNumBoxState,
       isLocked: !isLocked
-    })
-  }
+    });
+  };
+
+  const noBoxStyles = !boxId ? 'opacity-50' : '';
+  const valueContainerStyles = 'p-2 mr-2 flex justify-center text-4xl font-bold';
 
   return (
     <div className="p-3 w-full flex justify-start items-center">
-      <div className={`p-2 mr-2 flex justify-center text-4xl font-bold ${textColor}`}>
+      <div className={`${valueContainerStyles} ${textColor} ${noBoxStyles}`}>
         {currentNumBoxState.value || "0"}
       </div>
-      <div className={`flex justify-center`}>
+      <div className={`flex justify-center ${noBoxStyles}`}>
         <label 
           className={`mr-1 font-bold ${textColor} ${buttonLook}`} 
           htmlFor="numBoxLocked"
@@ -51,8 +53,11 @@ const NumBoxControl: React.FC<Props> = ({ boxId = '' }) => {
             onChange={handleNumBoxLockChange}
           />
       </div>
+      <div className="ml-auto">
+        <BoardStatus />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default NumBoxControl;

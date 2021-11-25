@@ -50,8 +50,8 @@ export function isPossibleNum(
   return isValidRow && isValidCol && isValidBox;
 }
 
-export function isBoxInBoardGroup(currId: string, activeId: string) {
-    const [ , currXVal, currYVal ] = currId.split('-');
+export function isThisBoxInGroupWithActive(thisId: string, activeId: string) {
+    const [ , currXVal, currYVal ] = thisId.split('-');
     const [ , activeXVal, activeYVal ] = activeId.split('-');
     if (activeXVal === currXVal) return true;
     if (activeYVal === currYVal) return true;

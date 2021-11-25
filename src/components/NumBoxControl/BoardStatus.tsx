@@ -3,7 +3,7 @@ import {
   useRecoilValue,
 } from 'recoil';
 
-import sudokuSolvedState, { SOLVED } from '../recoil/sudokuSolvedState';
+import sudokuSolvedState, { SOLVED } from '../../recoil/sudokuSolvedState';
 
 const BoardStatus: React.FC = () => {
   const solvedState = useRecoilValue(sudokuSolvedState);
