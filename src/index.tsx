@@ -10,7 +10,7 @@ import {
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-    <App></App>
+      <App />
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
