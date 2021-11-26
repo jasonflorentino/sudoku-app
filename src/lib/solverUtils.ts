@@ -53,7 +53,28 @@ export function isPossibleNum(
 export function isThisBoxInGroupWithActive(thisId: string, activeId: string) {
     const [ , currXVal, currYVal ] = thisId.split('-');
     const [ , activeXVal, activeYVal ] = activeId.split('-');
+    const boxGroupCoords = makeBoxGroupCoords(activeXVal, activeYVal);
+
     if (activeXVal === currXVal) return true;
     if (activeYVal === currYVal) return true;
+    if (boxGroupCoords[`${currXVal}-${currYVal}`]) return true;
     return false;
+}
+
+function makeBoxGroupCoords(x: string, y: string) {
+  const x1 = Number(x); 
+  const y1 = Number(y);
+  const boxCoords: {
+    [key: string]: boolean;
+  } = {};
+
+  for (let y2 = 0; y2 < 3; y2++) {
+    for (let x2 = 0; x2 < 3; x2++) {
+        const relativeY = y1 - (y1 % 3) + y2;
+        const relativeX = x1 - (x1 % 3) + x2;
+        boxCoords[`${relativeX}-${relativeY}`] = true;
+    }
+  }
+
+  return boxCoords;
 }
