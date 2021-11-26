@@ -50,6 +50,10 @@ export function isPossibleNum(
   return isValidRow && isValidCol && isValidBox;
 }
 
+/** 
+ * Checks if 'this' boxId is in one of the same
+ * groups as the 'active' boxId.
+ */
 export function isThisBoxInGroupWithActive(thisId: string, activeId: string) {
     const [ , currXVal, currYVal ] = thisId.split('-');
     const [ , activeXVal, activeYVal ] = activeId.split('-');
@@ -61,6 +65,14 @@ export function isThisBoxInGroupWithActive(thisId: string, activeId: string) {
     return false;
 }
 
+/** 
+ * Make lookup of the coordinates for the Box Group 
+ * of the given x and y coords.
+ * These groups don't change so it would be obviously 
+ * be better to just have these groups pre-written as 
+ * a constant somewhere, but we're prioritizing fun
+ * over performance.
+ */
 function makeBoxGroupCoords(x: string, y: string) {
   const x1 = Number(x); 
   const y1 = Number(y);
