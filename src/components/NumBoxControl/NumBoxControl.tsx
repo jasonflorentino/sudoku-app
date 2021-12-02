@@ -7,6 +7,7 @@ import sudokuState from "../../recoil/sudokuState";
 import activeNumBoxState from "../../recoil/activeNumBoxState";
 import { buttonLook, textColor } from "../../lib/styleUtils";
 import BoardStatus from './BoardStatus';
+import SolveButton from "./SolveButton";
 
 type Props = {
   boxId?: string
@@ -53,8 +54,9 @@ const NumBoxControl: React.FC<Props> = ({ boxId = '' }) => {
             onChange={handleNumBoxLockChange}
           />
       </div>
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center">
         <BoardStatus />
+        <SolveButton />
       </div>
     </div>
   );
