@@ -12,7 +12,7 @@ Wasn't really sure where this was going when I started, it's kind of just for le
 ## Run Locally
 *You'll need node/npm and a web browser*
 - Download or clone this repo to your machine
-- Instal dependencies
+- Install dependencies
   ```
   npm i
   # or you might need:
