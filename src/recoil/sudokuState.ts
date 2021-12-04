@@ -1,3 +1,8 @@
+/**
+ * Initializes the Sudoku board where
+ * each value is a separate Recoil atom.
+ * Not sure I'd recommend this.
+ */
 import {
   atom,
   RecoilState,
@@ -5,9 +10,7 @@ import {
 
 import numBoxesData from '../lib/defaultNumBoxes';
 
-export type SudokuStateMap = {
-  [key: string]: RecoilState<NumBoxState>
-}
+export type SudokuStateMap = Record<string, RecoilState<NumBoxState>>
 
 export interface NumBoxState {
   id: string;
@@ -18,7 +21,7 @@ export interface NumBoxState {
 const sudokuState: SudokuStateMap = {};
 
 for (const [boxId, defaultVal] of numBoxesData) {
-  const defaultState: NumBoxState = {
+  const defaultState = {
     id: boxId,
     value: defaultVal,
     isLocked: false
@@ -30,4 +33,3 @@ for (const [boxId, defaultVal] of numBoxesData) {
 }
 
 export default sudokuState;
-

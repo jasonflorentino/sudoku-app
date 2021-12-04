@@ -1,3 +1,7 @@
+/**
+ * Checks if the given character is a valid
+ * input for the Sudoku board.
+ */
 export function isValidNumBoxInput(str: string) {
   const code = str.charCodeAt(0);
   if (isNaN(code)) return false;

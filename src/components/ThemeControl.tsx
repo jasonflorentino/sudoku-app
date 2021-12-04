@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
-type Props = {
-  children: React.ReactNode,
-}
-
-const ThemeControl: React.FC<Props> = ({ children }) => {
+const ThemeControl = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +9,7 @@ const ThemeControl: React.FC<Props> = ({ children }) => {
 
   return (
     <div className={`${isDark ? 'dark' : ''} flex flex-col`}>
-      <div className={"dark:bg-gray-900 text-xl flex justify-end items-center p-4"}>
+      <div className={"dark:bg-gray-900 text-xl flex justify-end items-center p-6"}>
         <label className="mr-1" htmlFor="themeToggle">{isDark ? "🌖" : "🌒"}</label>
         <input 
           className="m-2"

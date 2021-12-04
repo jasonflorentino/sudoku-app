@@ -9,11 +9,7 @@ import { buttonLook, textColor } from "../../lib/styleUtils";
 import BoardStatus from './BoardStatus';
 import SolveButton from "./SolveButton";
 
-type Props = {
-  boxId?: string
-};
-
-const NumBoxControl: React.FC<Props> = ({ boxId = '' }) => {
+const NumBoxControl = ({ boxId = '' }: { boxId?: string }) => {
   const [currentNumBoxState, setCurrentNumBoxState] = useRecoilState(
     boxId ? sudokuState[boxId] : activeNumBoxState
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  useRecoilValue
+  useRecoilValue,
 } from 'recoil';
 
 import SudokuBoard from './components/SudokuBoard';
@@ -8,7 +8,7 @@ import ThemeControl from './components/ThemeControl';
 import NumBoxControl from './components/NumBoxControl';
 import activeNumBoxState from './recoil/activeNumBoxState';
 
-const App: React.FC = () => {
+const App = () => {
   const activeNumBox = useRecoilValue(activeNumBoxState);
   const { id: boxId } = activeNumBox;
   

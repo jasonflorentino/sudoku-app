@@ -5,7 +5,7 @@ import {
 
 import sudokuSolvedState, { SOLVED } from '../../recoil/sudokuSolvedState';
 
-const BoardStatus: React.FC = () => {
+const BoardStatus = () => {
   const solvedState = useRecoilValue(sudokuSolvedState);
   const bgColor = solvedState === SOLVED ? 'bg-green-500' : 'bg-red-500';
 

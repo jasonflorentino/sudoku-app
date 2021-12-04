@@ -1,3 +1,10 @@
+/**
+ * Checks that a board is solved by checking
+ * each value and asserting that (a) there is not
+ * more than one possible value for that position,
+ * and (b) and the value it found is the only 
+ * possible value.
+ */
 export function assertIsSolved(board: number[][]) {
   for (let y = 0; y < 9; y++) {
     for (let x = 0; x < 9; x++)  {
@@ -20,6 +27,11 @@ export function assertIsSolved(board: number[][]) {
 return true;
 }
 
+/**
+ * Checks if the number `num` is a valid
+ * choice for position `(x, y)` by asserting
+ * its uniqeness in its row, column, and box group.
+ */
 export function isPossibleNum(
   board: number[][], 
   y: number, 
@@ -50,11 +62,36 @@ export function isPossibleNum(
   return isValidRow && isValidCol && isValidBox;
 }
 
+/**
+ * Recursively solves a board in place as implemented in:
+ * https://github.com/jasonflorentino/algorithms-dataStructures/tree/main/sudoku
+ */
+export function solveBoard(board: number[][]) {
+  for (let y = 0; y < 9; y++) {
+      for (let x = 0; x < 9; x++)  {
+          if (board[y][x] === 0) {
+              for (let n = 1; n <= 9; n++) {
+                  if (isPossibleNum(board,y,x,n)) {
+                      board[y][x] = n;
+                      if (solveBoard(board)) {
+                          return board;
+                      } else {
+                          board[y][x] = 0;
+                      }
+                  }
+              }
+              return false;
+          }
+      }
+  }
+  return board;
+}
+
 /** 
  * Checks if 'this' boxId is in one of the same
  * groups as the 'active' boxId.
  */
-export function isThisBoxInGroupWithActive(thisId: string, activeId: string) {
+export function isThisBoxInGroupWithActive(thisId: string, activeId: string) {    
     const [ , currXVal, currYVal ] = thisId.split('-');
     const [ , activeXVal, activeYVal ] = activeId.split('-');
     const boxGroupCoords = makeBoxGroupCoords(activeXVal, activeYVal);

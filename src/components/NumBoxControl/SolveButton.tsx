@@ -1,17 +1,19 @@
 import React from 'react';
 import {
-  useRecoilValue,
+  useRecoilValue, useRecoilState,
 } from 'recoil';
 
 import sudokuSolvedState, { SOLVED } from '../../recoil/sudokuSolvedState';
 import { buttonLook, textColor } from '../../lib/styleUtils';
+import { solveBoardState } from '../../recoil/solveBoardState';
 
-const SolveButton: React.FC = () => {
+const SolveButton = () => {
+  const [solvedBoard, setBoardState] = useRecoilState(solveBoardState);
   const solvedState = useRecoilValue(sudokuSolvedState);
   const disabled = solvedState === SOLVED;
 
   const handleSolveBoard = () => {
-    
+    setBoardState(solvedBoard);
   }
 
   const disabledClasses = disabled ? ' opacity-50 cursor-not-allowed' : '';

@@ -5,9 +5,9 @@ import numBoxesData from '../../lib/defaultNumBoxes';
 import NumberBox from './NumberBox';
 import { formatStyles } from '../../lib/styleUtils';
 
-const SudokuBoard: React.FC = () => {
+const SudokuBoard = () => {
   const boardStyles = getBoardStyles();
-  
+
   return (
     <div className={boardStyles}>
       {numBoxesData.map(([boxId]) => (

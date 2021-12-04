@@ -1,3 +1,11 @@
+/**
+ * Default state for the Sudoku Board.
+ * 
+ * Commented code at bottom can be used to more easily
+ * generate a new `defaultNumBoxes` array by uncommenting,
+ * changing the `defaultState` var and running this file
+ * from the command line.
+ */
 
 type NumBoxDefaultValue = [string, number | string];
 
