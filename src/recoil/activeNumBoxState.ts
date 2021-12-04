@@ -1,3 +1,10 @@
+/**
+ * This should maybe be an atom that houses
+ * just the ID of the active Num Box (instead
+ * of directly referencing another atom) and
+ * then we create a Recoil selector that gets
+ * (and sets?) the data for this active Num Box.
+ */
 import {
   atom,
 } from 'recoil';
