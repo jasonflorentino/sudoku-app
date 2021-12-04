@@ -5,7 +5,7 @@ Not really sure where this is going yet, it's kind of just for learning/fun.
 
 ### Tasks:
 💭 Change number from the Control pane  
-💭 Click button to auto solve puzzle  
+✅ Click button to auto solve puzzle  
 ✅ Can't lock an empty number box  
 ✅ Different colors for different box states: Focus, Empty, Locked, Highlighted  
 ✅ Lock and Unlock a box from being changed  
@@ -20,4 +20,4 @@ Not really sure where this is going yet, it's kind of just for learning/fun.
 - Bootstrapped with CRA
 - Added Tailwind and Recoil first
 - Converted to TypeScript after
-- Seems to be some dependency issues that popped up during TypeScript migration, but it worked after installing deps with `--legacy-peer-deps` flag.
+- Seems to be some dependency issues that popped up during TypeScript migration, but it worked after installing deps with `--legacy-peer-deps` flag. 
