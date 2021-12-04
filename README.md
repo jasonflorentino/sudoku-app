@@ -24,7 +24,7 @@ Wasn't really sure where this was going when I started, it's kind of just for le
   ```
 
 ## Tasks:
-💭 Host live deployment on Netlify or something
+💭 Host live deployment on Netlify or something  
 💭 Change number from the Control pane  
 ✅ Click button to auto solve puzzle  
 ✅ Can't lock an empty number box  
